@@ -36,7 +36,7 @@
     gh: $("#github-link")
   };
 
-  // Fill GitHub link placeholder
+  // GitHub link 
   el.gh.href = "https://israellallen.github.io/gongfu-tea-timer/";
   el.gh.textContent = "GitHub Repo";
 
