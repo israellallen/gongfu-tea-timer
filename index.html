@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gongfu Tea Timer</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="app-header">
+    <h1>Gongfu Tea Timer</h1>
+    <div class="header-actions">
+      <button id="toggle-theme" aria-label="Toggle theme">🌓</button>
+      <a id="github-link" class="btn ghost" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro card">
+      <h2>Steep like a pro</h2>
+      <p>
+        Brew tea the Gongfu way: short, repeated infusions that reveal evolving flavors.
+        Choose a preset or build your own infusion schedule. Times persist locally.
+      </p>
+      <details>
+        <summary>What is Gongfu brewing?</summary>
+        <p>
+          Gongfu (工夫) is a Chinese brewing method that uses high leaf-to-water ratio,
+          small vessels (gaiwan or yixing), and multiple short steeps. Start short,
+          increase times gradually, and taste each cup.
+        </p>
+      </details>
+    </section>
+
+    <section class="controls-grid">
+      <div class="card">
+        <h3>Preset</h3>
+        <select id="preset-select" aria-label="Tea preset"></select>
+        <div class="row gap">
+          <button id="save-preset" class="btn">Save as preset</button>
+          <button id="delete-preset" class="btn danger">Delete preset</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Infusion Plan</h3>
+        <div class="grid-2 gap">
+          <label>First steep (sec)
+            <input id="base-seconds" type="number" min="1" value="10"/>
+          </label>
+          <label>Increase rule
+            <select id="increase-rule">
+              <option value="fixed">+ fixed</option>
+              <option value="percent">+ %</option>
+              <option value="multiplier">× multiplier</option>
+            </select>
+          </label>
+          <label>Amount
+            <input id="increase-amount" type="number" step="0.1" value="2"/>
+          </label>
+          <label>Infusions
+            <input id="num-infusions" type="number" min="1" value="10"/>
+          </label>
+        </div>
+        <div class="row gap mt">
+          <button id="generate" class="btn">Generate</button>
+          <button id="export-json" class="btn ghost">Export</button>
+          <input id="import-file" type="file" accept="application/json" hidden/>
+          <button id="import-json" class="btn ghost">Import</button>
+        </div>
+      </div>
+
+      <div class="card timer-card">
+        <h3>Timer</h3>
+        <div class="timer-visual">
+          <svg viewBox="0 0 120 120" class="progress-ring" aria-hidden="true">
+            <circle class="ring-bg" cx="60" cy="60" r="54" stroke-width="8" fill="none" />
+            <circle class="ring" cx="60" cy="60" r="54" stroke-width="8" fill="none" stroke-linecap="round"/>
+          </svg>
+          <div class="timer-display">
+            <div id="time-remaining">00:10</div>
+            <div id="infusion-label">Infusion 1 / 10</div>
+          </div>
+        </div>
+
+        <div class="row gap mt">
+          <button id="start" class="btn success">Start</button>
+          <button id="pause" class="btn">Pause</button>
+          <button id="reset" class="btn ghost">Reset</button>
+          <button id="next" class="btn">Next ▶</button>
+        </div>
+        <small class="muted">Keyboard: <kbd>Space</kbd> start/pause, <kbd>N</kbd> next, <kbd>R</kbd> reset</small>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Schedule</h3>
+      <table id="schedule-table">
+        <thead>
+          <tr>
+            <th>#</th><th>Time (sec)</th><th>Notes</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h3>Brew Log</h3>
+      <div id="log"></div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <span>Built by Israel Allen · MIT License</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
