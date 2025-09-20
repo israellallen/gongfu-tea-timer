@@ -37,8 +37,8 @@
   };
 
   // Fill GitHub link placeholder
-  el.gh.href = "https://github.com/";
-  el.gh.textContent = "Open on GitHub";
+  el.gh.href = "https://israellallen.github.io/gongfu-tea-timer/";
+  el.gh.textContent = "GitHub Repo";
 
   // Theme
   const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
